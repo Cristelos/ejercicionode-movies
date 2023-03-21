@@ -40,7 +40,7 @@
         const {id} = req.params;
         const putCinema = new cinema(req.body);
         putCinema._id = id;
-        const updatCinema = await cinema.findOneAndUpdate(id, putCinema,{new: true});
+        const updateCinema = await cinema.findOneAndUpdate(id, putCinema,{new: true});
 
         if(!updateCinema){ 
             return res.status(404).json({"message":"Cinema not found"});
