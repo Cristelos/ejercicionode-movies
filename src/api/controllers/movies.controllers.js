@@ -1,5 +1,6 @@
 const movies = require("../models/movies.models");
 
+//Gets
 const getMovies = async (req,res) => {
     try {
         const allMovies = await movies.find(); //Recojo los datos con una petición a mongo
@@ -35,7 +36,9 @@ const getMoviesByTitle = async (req,res) => {
 
 const getMoviesByGenre = async (req,res) => {
     try {
-        
+        const {genre} = req.params;
+        const movieByGenre = await movies.find({genre: genre});
+        return res.status(200).json(movieByGenre);
     } catch (error) {
         return res.status(500).json(error);
     }
@@ -43,12 +46,15 @@ const getMoviesByGenre = async (req,res) => {
 
 const getMoviesByYear = async (req,res) => {
     try {
-        
+        const {year} = req.params;
+        const movieByYear = await movies.find({year:{$gt:year}});
+        return res.status(200).json(movieByYear);
     } catch (error) {
         return res.status(500).json(error);
     }
 }
 
+//Post
 const postMovies = async (req,res) => {
     try {
         console.log(req.body);
@@ -64,6 +70,7 @@ const postMovies = async (req,res) => {
     }
 };
 
+//Put
 const putMovies = async (req,res) => {
     try {
         const {id} = req.params;
@@ -80,6 +87,7 @@ const putMovies = async (req,res) => {
     }
 };
 
+//Delete
 const deleteMovies = async (req,res) => {
     try {
         const {id} = req.params;//Le pasamos el id
