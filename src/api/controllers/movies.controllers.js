@@ -23,13 +23,11 @@ const getMoviesById = async (req,res) => {
 }
 
 const getMoviesByTitle = async (req,res) => {
-    const {title} = req.params;
     try {
-        const movieSearchByTitle = await movies.find({ title });
-        // if(!movies){
-        //     return res.status(404).json({'message':'Movie not found'})
-        // }
-        return res.statur(200).json(movieSearchByTitle);
+        const {title} = req.params;
+        // console.log(title);
+        const movieByTitle = await movies.find({title: title});
+        return res.status(200).json(movieByTitle);
     } catch (error) {
         return res.status(500).json(error);
     }
