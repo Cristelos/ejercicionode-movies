@@ -9,6 +9,48 @@ const getMovies = async (req,res) => {
     }
 };
 
+const getMoviesById = async (req,res) => {
+    try {
+        const {id} = req.params;
+        const movieSearchById = await movies.findById(id);
+        if(!movies){
+            return res.status(404).json({'message':'Movie not found'})
+        }
+        return res.status(200).json(movieSearchById);
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+}
+
+const getMoviesByTitle = async (req,res) => {
+    const {title} = req.params;
+    try {
+        const movieSearchByTitle = await movies.find({ title });
+        // if(!movies){
+        //     return res.status(404).json({'message':'Movie not found'})
+        // }
+        return res.statur(200).json(movieSearchByTitle);
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+}
+
+const getMoviesByGenre = async (req,res) => {
+    try {
+        
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+}
+
+const getMoviesByYear = async (req,res) => {
+    try {
+        
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+}
+
 const postMovies = async (req,res) => {
     try {
         console.log(req.body);
@@ -53,4 +95,4 @@ const deleteMovies = async (req,res) => {
     }
 }
 
-module.exports = {getMovies, postMovies, putMovies, deleteMovies};  
+module.exports = {getMovies, postMovies, putMovies, deleteMovies,getMoviesById,getMoviesByTitle,getMoviesByGenre,getMoviesByYear};  
