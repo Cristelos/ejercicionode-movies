@@ -10,13 +10,14 @@
   };
 
   const getCinemaById = async (req, res) => {
+    console.log(req.params);
     try {
         const {id} = req.params;
-        const cinema = await cinema.findById(id).populate('movie');
-        if(!cinema){
+        const cinemaSearch = await cinema.findById(id).populate('movies');
+        if(!cinemaSearch){
             return res.status(404).json({"message":"Cinema not found"});
         }
-        return res.status(200).json(cinema);
+        return res.status(200).json(cinemaSearch);
     } catch (error) {
         return res.status(500).json(error);
     }
