@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const movies = require('../api/models/movies.models');
+const dotenv = require('dotenv');
 
 const Movie = require('../api/models/movies.models'); 
 
@@ -37,7 +38,9 @@ const arrayMovies = [
     }
 ]; 
 
-mongoose.connect('mongodb+srv://root:root@cluster0.iefldp7.mongodb.net/peliculas?retryWrites=true&w=majority',{//aquí nos conectamos a nuestra BBDD en mongo db
+dotenv.config();
+
+mongoose.connect(process.env.DB_URL,{//aquí nos conectamos a nuestra BBDD en mongo db
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(async () =>{ //Esto es como un ternario reducido
